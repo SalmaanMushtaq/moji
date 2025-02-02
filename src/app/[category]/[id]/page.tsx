@@ -16,12 +16,12 @@ interface SingleProduct {
   category: string;
 }
 
-// Define the Page Props Type
-interface ProductDetailProps {
+// ✅ Remove the custom `ProductDetailProps` type and let Next.js handle it
+export default async function ProductDetail({
+  params,
+}: {
   params: { category: string; id: string };
-}
-
-export default async function ProductDetail({ params }: ProductDetailProps) {
+}) {
   const { category, id } = params; // ✅ No await needed here
 
   // Fetch product details
