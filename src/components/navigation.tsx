@@ -1,6 +1,6 @@
 "use client"; // Required for using hooks
 
-import { BaggageClaim, ShoppingCart } from "lucide-react";
+import { BaggageClaim } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

@@ -12,7 +12,7 @@ export default function Contact() {
         Contact Us
       </h1>
       <p className="text-gray-600 text-center mt-2">
-        We're here to help. Reach out to us anytime!
+        We&apos;re here to help. Reach out to us anytime!
       </p>
 
       {/* Contact Details */}

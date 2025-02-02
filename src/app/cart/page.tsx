@@ -1,7 +1,6 @@
 "use client";
 import { useCart } from "@/context/cartContext";
 import { Minus, Plus, Trash2Icon } from "lucide-react";
-import { useState } from "react";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
