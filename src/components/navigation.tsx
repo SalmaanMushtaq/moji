@@ -1,6 +1,7 @@
 "use client"; // Required for using hooks
 
 import { BaggageClaim } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -55,7 +56,7 @@ export default function Navigation() {
         </ul>
       </nav>
       <section className="flex justify-center items-center gap-4">
-        <img
+        <Image
           className="inline-block size-10 rounded-full ring-2 ring-white"
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
           alt=""

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/cartContext";
 import { Minus, Plus } from "lucide-react";
+import Image from "next/image";
 
 export default function ProductPage({
   product,
@@ -23,7 +24,6 @@ export default function ProductPage({
       image: product.image,
       quantity: quantity,
     });
-    console.log("Added to cart:", product.title, quantity);
   }
 
   return (
@@ -33,7 +33,7 @@ export default function ProductPage({
         {/* Left: Product Images */}
         <div>
           <div className="border-2 border-orange-500 p-2 rounded-md flex justify-center items-center">
-            <img
+            <Image
               src={selectedImage}
               alt={product.title}
               className="max-h-80 object-contain"
@@ -52,7 +52,7 @@ export default function ProductPage({
                 }`}
                 onClick={() => setSelectedImage(thumb)}
               >
-                <img
+                <Image
                   src={thumb}
                   alt={`Thumbnail ${index}`}
                   className="w-16 h-16 object-contain"
@@ -120,7 +120,7 @@ export default function ProductPage({
               className="border p-4 rounded-md shadow-md hover:shadow-lg transition"
             >
               <Link href={`/${category}/${related.id}`}>
-                <img
+                <Image
                   src={related.image}
                   alt={related.title}
                   className="h-32 object-contain mx-auto"

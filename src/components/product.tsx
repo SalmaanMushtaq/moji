@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { SingleProduct } from "../../next-env";
 import { useCart } from "@/context/cartContext";
+import Image from "next/image";
+import { SingleProduct } from "@/app/page";
 
 interface ProductProps {
   product: SingleProduct;
@@ -13,7 +14,7 @@ export default function Product({ product }: ProductProps) {
     <div className="border border-gray-300 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col bg-white">
       {/* Product Image */}
       <div className="h-48 flex justify-center items-center bg-gray-100 rounded-lg">
-        <img
+        <Image
           src={product.image}
           alt={product.title}
           className="h-full max-h-40 object-contain"

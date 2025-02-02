@@ -1,6 +1,7 @@
 "use client";
 import { useCart } from "@/context/cartContext";
 import { Minus, Plus, Trash2Icon } from "lucide-react";
+import Image from "next/image";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -19,7 +20,7 @@ export default function CartPage() {
               key={item.id}
               className="flex items-center gap-4 border-b-2 border-orange-300/75 py-4"
             >
-              <img
+              <Image
                 src={item.image}
                 alt={item.title}
                 className="w-16 h-16 object-contain"
