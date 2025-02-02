@@ -11,7 +11,7 @@ export default async function ProductDetail({
 }: {
   params: { category: string; id: string };
 }) {
-  const { category, id } = await params;
+  const { category, id } = params;
 
   // Fetch product details
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
@@ -21,9 +21,9 @@ export default async function ProductDetail({
   const relatedRes = await fetch(
     `https://fakestoreapi.com/products/category/${category}`
   );
-  let relatedProducts = await relatedRes.json();
+  let relatedProducts: SingleProduct[] = await relatedRes.json();
   relatedProducts = relatedProducts
-    .filter((p: SingleProduct) => p.id !== parseInt(id))
+    .filter((p) => p.id !== parseInt(id))
     .slice(0, 4);
 
   return (
