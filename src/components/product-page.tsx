@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/cartContext";
 import { Minus, Plus } from "lucide-react";
-import Image from "next/image";
 
 // Define the type for a product
 interface Product {
@@ -50,7 +49,7 @@ export default function ProductPage({
         {/* Left: Product Images */}
         <div>
           <div className="border-2 border-orange-500 p-2 rounded-md flex justify-center items-center">
-            <Image
+            <img
               src={selectedImage}
               alt={product.title}
               className="max-h-80 object-contain"
@@ -71,7 +70,7 @@ export default function ProductPage({
                 }`}
                 onClick={() => setSelectedImage(thumb)}
               >
-                <Image
+                <img
                   src={thumb}
                   alt={`Thumbnail ${index}`}
                   className="w-16 h-16 object-contain"
@@ -141,7 +140,7 @@ export default function ProductPage({
               className="border p-4 rounded-md shadow-md hover:shadow-lg transition"
             >
               <Link href={`/${category}/${related.id}`}>
-                <Image
+                <img
                   src={related.image}
                   alt={related.title}
                   className="h-32 object-contain mx-auto"
