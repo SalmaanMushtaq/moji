@@ -6,14 +6,31 @@ import { useCart } from "@/context/cartContext";
 import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 
+// Define the type for a product
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  description: string;
+}
+
+// Define the props type
+interface ProductPageProps {
+  product: Product;
+  category: string;
+  thumbnails: string[];
+  relatedProducts: Product[];
+}
+
 export default function ProductPage({
   product,
   category,
   thumbnails,
   relatedProducts,
-}: any) {
-  const [selectedImage, setSelectedImage] = useState(product.image);
-  const [quantity, setQuantity] = useState(1);
+}: ProductPageProps) {
+  const [selectedImage, setSelectedImage] = useState<string>(product.image);
+  const [quantity, setQuantity] = useState<number>(1);
   const { addToCart } = useCart();
 
   function handleAddToCart() {
@@ -37,6 +54,8 @@ export default function ProductPage({
               src={selectedImage}
               alt={product.title}
               className="max-h-80 object-contain"
+              width={400}
+              height={400}
             />
           </div>
 
@@ -56,6 +75,8 @@ export default function ProductPage({
                   src={thumb}
                   alt={`Thumbnail ${index}`}
                   className="w-16 h-16 object-contain"
+                  width={64}
+                  height={64}
                 />
               </button>
             ))}
@@ -86,14 +107,14 @@ export default function ProductPage({
           {/* Quantity Selector */}
           <div className="flex gap-2 items-center mt-2 border border-orange-500 rounded-full w-fit">
             <button
-              className="px-3 py-1 rounded  font-semibold hover:text-orange-500"
+              className="px-3 py-1 rounded font-semibold hover:text-orange-500"
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             >
               <Minus />
             </button>
             <span className="text-orange-500 font-bold">{quantity}</span>
             <button
-              className="px-3 py-1 rounded  font-semibold hover:text-orange-500"
+              className="px-3 py-1 rounded font-semibold hover:text-orange-500"
               onClick={() => setQuantity((q) => q + 1)}
             >
               <Plus />
@@ -114,7 +135,7 @@ export default function ProductPage({
       <div className="mt-16">
         <h2 className="text-2xl font-bold mb-4">Related Products</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {relatedProducts.map((related: any) => (
+          {relatedProducts.map((related: Product) => (
             <div
               key={related.id}
               className="border p-4 rounded-md shadow-md hover:shadow-lg transition"
@@ -124,6 +145,8 @@ export default function ProductPage({
                   src={related.image}
                   alt={related.title}
                   className="h-32 object-contain mx-auto"
+                  width={128}
+                  height={128}
                 />
                 <h3 className="mt-2 text-lg font-semibold line-clamp-1">
                   {related.title}
