@@ -1,3 +1,4 @@
+import { SingleProduct } from "@/app/page";
 import ProductPage from "@/components/product-page";
 import { Metadata } from "next";
 export const metadata: Metadata = {
@@ -22,8 +23,8 @@ export default async function ProductDetail({
   );
   let relatedProducts = await relatedRes.json();
   relatedProducts = relatedProducts
-    .filter((p: any) => p.id !== parseInt(id))
-    .slice(0, 4); // Limit to 4 products
+    .filter((p: SingleProduct) => p.id !== parseInt(id))
+    .slice(0, 4);
 
   return (
     <ProductPage
