@@ -1,4 +1,4 @@
-import { SingleProduct } from "../../next-env";
+import { SingleProduct } from "@/app/page";
 import Product from "./product";
 
 export default function ProductList({
