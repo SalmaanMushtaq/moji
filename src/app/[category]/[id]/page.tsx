@@ -1,4 +1,3 @@
-//@ts-nocheck
 import ProductPage from "@/components/product-page";
 import { Metadata } from "next";
 
@@ -23,7 +22,7 @@ export default async function ProductDetail({
 }: {
   params: { category: string; id: string };
 }) {
-  const { category, id } = params; // ✅ No await needed here
+  const { category, id } = params;
 
   // Fetch product details
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
