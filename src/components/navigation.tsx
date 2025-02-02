@@ -1,10 +1,12 @@
 "use client"; // Required for using hooks
 
-import { BaggageClaim } from "lucide-react";
+import { useState } from "react";
+import { BaggageClaim, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   const isActive = (path: string) =>
@@ -12,55 +14,88 @@ export default function Navigation() {
 
   return (
     <>
+      {/* Logo */}
       <Link
         href="/"
-        className={`ps-4 text-2xl font-semibold flex gap-4 items-center ${isActive(
+        className={`text-2xl font-semibold flex gap-2 items-center ${isActive(
           "/"
-        )}`}
+        )}">`}
       >
-        <BaggageClaim size={30} /> MOJI
+        <BaggageClaim size={30} className="text-orange-500" /> MOJI
       </Link>
-      <nav>
-        <ul className="flex space-x-6 gap-2 text-lg">
-          <li className="hover:shadow-sm rounded-sm hover:shadow-orange-400 px-2 py-1">
-            <Link href="/electronics" className={isActive("/electronics")}>
-              Electronics
-            </Link>
-          </li>
-          <li className="hover:shadow-sm rounded-sm hover:shadow-orange-400 px-2 py-1">
-            <Link href="/men" className={isActive("/men")}>
-              Men
-            </Link>
-          </li>
-          <li className="hover:shadow-sm rounded-sm hover:shadow-orange-400 px-2 py-1">
-            <Link href="/women" className={isActive("/women")}>
-              Women
-            </Link>
-          </li>
-          <li className="hover:shadow-sm rounded-sm hover:shadow-orange-400 px-2 py-1">
-            <Link href="/jewelery" className={isActive("/jewelery")}>
-              Jewelery
-            </Link>
-          </li>
-          <li className="hover:shadow-sm rounded-sm hover:shadow-orange-400 px-2 py-1">
-            <Link href="/about" className={isActive("/about")}>
-              About
-            </Link>
-          </li>
-          <li className="hover:shadow-sm rounded-sm hover:shadow-orange-400 px-2 py-1">
-            <Link href="/contact" className={isActive("/contact")}>
-              Contact
-            </Link>
-          </li>
-        </ul>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden text-gray-700 focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? (
+          <X size={30} className="text-orange-500 hover:text-red-500" />
+        ) : (
+          <Menu size={30} className="text-orange-500" />
+        )}
+      </button>
+
+      {/* Desktop Navigation */}
+      <nav className="hidden md:flex space-x-6 text-lg">
+        <NavLink href="/electronics" isActive={isActive} label="Electronics" />
+        <NavLink href="/men" isActive={isActive} label="Men" />
+        <NavLink href="/women" isActive={isActive} label="Women" />
+        <NavLink href="/jewelery" isActive={isActive} label="Jewelery" />
+        <NavLink href="/about" isActive={isActive} label="About" />
+        <NavLink href="/contact" isActive={isActive} label="Contact" />
       </nav>
-      <section className="flex justify-center items-center gap-4">
+
+      {/* Profile Picture */}
+      <section className="hidden md:flex justify-center items-center">
         <img
-          className="inline-block size-10 rounded-full ring-2 ring-white"
+          className="size-10 rounded-full ring-2 ring-white"
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt=""
+          alt="User"
         />
       </section>
+
+      {/* Mobile Navigation Menu (Dropdown) */}
+      {isOpen && (
+        <div
+          className={`absolute top-16 left-0 w-full bg-gray-100 border-t-2 shadow-lg md:hidden 
+      transition-transform duration-300 ease-in-out transform ${
+        isOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
+      } origin-top`}
+        >
+          <ul className="flex flex-col items-center space-y-4 py-4 text-lg">
+            <NavLink
+              href="/electronics"
+              isActive={isActive}
+              label="Electronics"
+            />
+            <NavLink href="/men" isActive={isActive} label="Men" />
+            <NavLink href="/women" isActive={isActive} label="Women" />
+            <NavLink href="/jewelery" isActive={isActive} label="Jewelery" />
+            <NavLink href="/about" isActive={isActive} label="About" />
+            <NavLink href="/contact" isActive={isActive} label="Contact" />
+          </ul>
+        </div>
+      )}
     </>
+  );
+}
+
+// Reusable NavLink Component
+function NavLink({
+  href,
+  isActive,
+  label,
+}: {
+  href: string;
+  isActive: (path: string) => string;
+  label: string;
+}) {
+  return (
+    <li className="hover:shadow-sm rounded-sm hover:shadow-orange-400 px-2 py-1">
+      <Link href={href} className={isActive(href)}>
+        {label}
+      </Link>
+    </li>
   );
 }
