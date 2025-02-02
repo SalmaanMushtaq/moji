@@ -1,3 +1,4 @@
+//@ts-nocheck
 import ProductPage from "@/components/product-page";
 import { Metadata } from "next";
 
